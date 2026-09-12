@@ -1,31 +1,38 @@
 package com.aquariux.technical.assessment.trade.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
 import com.aquariux.technical.assessment.trade.dto.response.BestPriceResponse;
 import com.aquariux.technical.assessment.trade.entity.CryptoPrice;
 import com.aquariux.technical.assessment.trade.mapper.CryptoPriceMapper;
+import com.aquariux.technical.assessment.trade.service.MonetaryPolicy;
+import com.aquariux.technical.assessment.trade.service.QuotePolicy;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class PriceServiceImplTest {
 
-    @Mock
-    private CryptoPriceMapper cryptoPriceMapper;
+    @Mock private CryptoPriceMapper cryptoPriceMapper;
 
-    @InjectMocks
-    private PriceServiceImpl priceService;
+    @Spy private QuotePolicy quotePolicy = new QuotePolicy(new MonetaryPolicy(), 1000);
+
+    @Spy private Clock clock = Clock.systemUTC();
+
+    @InjectMocks private PriceServiceImpl priceService;
 
     private CryptoPrice btcPrice;
     private CryptoPrice ethPrice;
@@ -62,7 +69,7 @@ class PriceServiceImplTest {
 
         // Then
         assertThat(result).hasSize(2);
-        
+
         BestPriceResponse btcResponse = result.get(0);
         assertThat(btcResponse.getPairName()).isEqualTo("BTCUSDT");
         assertThat(btcResponse.getBidPrice()).isEqualTo(new BigDecimal("50000.00"));

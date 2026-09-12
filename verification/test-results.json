@@ -1,0 +1,283 @@
+{
+  "tests": 37,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.aquariux.technical.assessment.trade.PricePublisherTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.524,
+      "cases": [
+        {
+          "name": "crossedAggregateIsRecordedButNotExecutable",
+          "seconds": 0.075,
+          "status": "passed"
+        },
+        {
+          "name": "preservesPairSideAndSource",
+          "seconds": 0.017,
+          "status": "passed"
+        },
+        {
+          "name": "timestampTiesHaveOneDeterministicLatestResult",
+          "seconds": 0.006,
+          "status": "passed"
+        },
+        {
+          "name": "oldOrMissingQuotesNeverRefreshHistory",
+          "seconds": 0.005,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.SchedulerEnabledTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.067,
+      "cases": [
+        {
+          "name": "schedulingIsActuallyEnabled",
+          "seconds": 0.017,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.TradeApplicationTests",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.212,
+      "cases": [
+        {
+          "name": "contextLoads",
+          "seconds": 0.002,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.TradeExecutionTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.024,
+      "cases": [
+        {
+          "name": "spendsExactBalanceAndRetainsZeroWallet",
+          "seconds": 0.05,
+          "status": "passed"
+        },
+        {
+          "name": "insufficientFundsAndMissingDebitDoNotCreateWallets",
+          "seconds": 0.009,
+          "status": "passed"
+        },
+        {
+          "name": "supportsOneHundredConcurrentSameUserRequestsWithoutOverspending",
+          "seconds": 0.143,
+          "status": "passed"
+        },
+        {
+          "name": "buysAndSellsUsingTheCorrectSide(String)[1]",
+          "seconds": 0.012,
+          "status": "passed"
+        },
+        {
+          "name": "buysAndSellsUsingTheCorrectSide(String)[2]",
+          "seconds": 0.007,
+          "status": "passed"
+        },
+        {
+          "name": "concurrentReplayCreatesExactlyOneTradeAndOneDestinationWallet",
+          "seconds": 0.043,
+          "status": "passed"
+        },
+        {
+          "name": "concurrentBuysAndSellsPreserveBothBalances",
+          "seconds": 0.149,
+          "status": "passed"
+        },
+        {
+          "name": "inactiveSymbolAndUnknownUserFailWithoutMutation",
+          "seconds": 0.005,
+          "status": "passed"
+        },
+        {
+          "name": "hundredIndependentUsersCanTrade",
+          "seconds": 0.07,
+          "status": "passed"
+        },
+        {
+          "name": "failedRequestsDoNotReserveKeys",
+          "seconds": 0.006,
+          "status": "passed"
+        },
+        {
+          "name": "databaseFailuresRollbackAllWrites(String)[1]",
+          "seconds": 0.009,
+          "status": "passed"
+        },
+        {
+          "name": "databaseFailuresRollbackAllWrites(String)[2]",
+          "seconds": 0.004,
+          "status": "passed"
+        },
+        {
+          "name": "staleFutureCrossedAndBoundaryQuotesFailClosed",
+          "seconds": 0.008,
+          "status": "passed"
+        },
+        {
+          "name": "creditOverflowRollsBack",
+          "seconds": 0.007,
+          "status": "passed"
+        },
+        {
+          "name": "concurrentDifferentPairsCannotLoseUpdatesToSharedUsdt",
+          "seconds": 0.047,
+          "status": "passed"
+        },
+        {
+          "name": "replaysBeforeCheckingChangedEligibilityOrPrice",
+          "seconds": 0.007,
+          "status": "passed"
+        },
+        {
+          "name": "sameKeyCanBeUsedByDifferentUsers",
+          "seconds": 0.008,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.TradeHttpTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.489,
+      "cases": [
+        {
+          "name": "requiresIdempotencyHeaderAndJson",
+          "seconds": 0.076,
+          "status": "passed"
+        },
+        {
+          "name": "rejectsBadInputsWithStructuredErrorsAndNoMutation",
+          "seconds": 0.068,
+          "status": "passed"
+        },
+        {
+          "name": "walletReadIncludesUnacquiredAssetsWithoutCreatingRows",
+          "seconds": 0.012,
+          "status": "passed"
+        },
+        {
+          "name": "returnsPersistedDecimalsAndIdenticalReplay",
+          "seconds": 0.008,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.pricing.MarketDataClientTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.022,
+      "cases": [
+        {
+          "name": "huobiUsesProviderResponseTimestampAndCorrectSide",
+          "seconds": 0.011,
+          "status": "passed"
+        },
+        {
+          "name": "outageBackoffDoesNotPreventTheOtherSourceFromWorking",
+          "seconds": 0.004,
+          "status": "passed"
+        },
+        {
+          "name": "decimalParsingIsExactAndMalformedPairDoesNotDiscardOtherPairs",
+          "seconds": 0.002,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.service.MonetaryPolicyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.001,
+      "cases": [
+        {
+          "name": "exactScaleAndBounds",
+          "seconds": 0.0,
+          "status": "passed"
+        },
+        {
+          "name": "usesHalfEvenOnceAndRejectsDustAndOverflow",
+          "seconds": 0.0,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.service.impl.PriceServiceImplTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.097,
+      "cases": [
+        {
+          "name": "getLatestBestPrices_ShouldReturnMappedPrices",
+          "seconds": 0.096,
+          "status": "passed"
+        },
+        {
+          "name": "getLatestBestPrices_WhenNoPrices_ShouldReturnEmptyList",
+          "seconds": 0.001,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "com.aquariux.technical.assessment.trade.service.impl.WalletServiceImplTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.013,
+      "cases": [
+        {
+          "name": "getUserWalletBalances_WithZeroBalance_ShouldReturnWalletWithZeroBalance",
+          "seconds": 0.011,
+          "status": "passed"
+        },
+        {
+          "name": "getUserWalletBalances_ShouldReturnMappedWallets",
+          "seconds": 0.0,
+          "status": "passed"
+        },
+        {
+          "name": "getUserWalletBalances_WhenNoWallets_ShouldReturnEmptyList",
+          "seconds": 0.0,
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

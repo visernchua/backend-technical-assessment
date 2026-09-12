@@ -3,28 +3,35 @@ package com.aquariux.technical.assessment.trade.controller;
 import com.aquariux.technical.assessment.trade.dto.request.TradeRequest;
 import com.aquariux.technical.assessment.trade.dto.response.TradeResponse;
 import com.aquariux.technical.assessment.trade.service.TradeServiceInterface;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/trades")
 @Tag(name = "Trade", description = "Trading operations")
 @RequiredArgsConstructor
 public class TradeController {
-
     private final TradeServiceInterface tradeService;
-    // Add additional beans here if needed for your implementation
 
-    @PostMapping(value = "/execute", produces = "application/json")
-    @Operation(summary = "Execute trade", description = "Execute a buy or sell trade for cryptocurrency pairs")
-    public ResponseEntity<TradeResponse> executeTrade(@RequestBody TradeRequest tradeRequest) {
-        // TODO: How should a trading API endpoint behave?
-        return ResponseEntity.ok(tradeService.executeTrade(tradeRequest));
+    @PostMapping(value = "/execute", produces = "application/json", consumes = "application/json")
+    @Operation(
+            summary = "Execute an internal market trade",
+            description =
+                    "Quantity is in base asset units. Retry with the same Idempotency-Key after"
+                            + " timeouts.")
+    public ResponseEntity<TradeResponse> executeTrade(
+            @Valid @RequestBody TradeRequest request,
+            @RequestHeader("Idempotency-Key") String key) {
+        // REASON: The service proxy commits before returning; never acknowledge uncommitted
+        // settlement.
+        return ResponseEntity.ok(tradeService.executeTrade(request, key));
     }
 }

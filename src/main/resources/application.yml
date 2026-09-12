@@ -2,7 +2,7 @@ spring:
   application:
     name: aquariux-backend
   datasource:
-    url: jdbc:h2:mem:aquariux
+    url: jdbc:h2:mem:aquariux;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=1000
     driver-class-name: org.h2.Driver
     username: sa
     password: 
@@ -21,3 +21,15 @@ mybatis:
   type-aliases-package: com.aquariux.technical.assessment.trade.entity
   configuration:
     map-underscore-to-camel-case: true
+
+    # REASON: Bound lock/SQL waits; a contended trade may be retried using the same key.
+    default-statement-timeout: 2
+
+trading:
+  # ASSUMPTION: Reject quotes at least one second old when the trade is accepted.
+  max-price-age-ms: 1000
+  pricing:
+    enabled: true
+    poll-ms: 250
+    connect-timeout-ms: 200
+    read-timeout-ms: 300
